@@ -1,0 +1,47 @@
+
+<div class="container register">
+  <div class="row">
+    <div class="col-md-3 register-left">
+      <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+      <h3>Welcome</h3>
+      <p>Stock Management System!</p>
+    </div>
+    <div class="col-md-9 register-right">
+     
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <h3 class="register-heading">Register as an Employee</h3>
+          <div class="row register-form justify-content-md-center">
+            <div class="col-md-6">
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="form-group">
+                <%= f.text_field :name, :class => "form-control", placeholder: "Name *" %>
+              </div>
+              <div class="form-group">
+                <%= f.email_field :email, :class => "form-control", placeholder: "Your Email *" %>
+              </div>
+              <div class="form-group">
+                <%= f.password_field :password, :class => "form-control", placeholder: "Password * (6 characters minimum)" %>
+              </div>
+              <div class="form-group">
+                 <%= f.password_field :password_confirmation, :class => "form-control", placeholder: "Confirm Password *" %>
+              </div>
+               <div class="form-group">
+                 <%= f.label :user_type %>
+                  <%= f.select(:user_type, options_for_select([['Manager','manager'],['Salesperson',"Salesperson"],['Picker', "picker"],['Dispatcher',"Dispatcher"]])) %>
+              </div>
+                <%= f.submit "Sign up", :class => "btnRegister" %>
+              <% end %>
+            </div>
+          </div>
+        </div>      
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

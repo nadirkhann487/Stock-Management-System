@@ -1,0 +1,27 @@
+<div class="login-page">
+  <div class="form">
+    <h2>Edit <%= resource_name.to_s.humanize %></h2>
+     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :class => 'register-form' }) do |f| %>
+     <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.text_field :name, autocomplete: "name", placeholder: "Name *" %>
+      <%= f.email_field :email, autocomplete: "email", placeholder: "Email *" %>
+      <%= f.password_field :password, autocomplete: "new-password" , placeholder: "New Passord *" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm New Password *" %>  
+      <%= f.password_field :current_password, autocomplete: "current-password" , placeholder: "Current Password *" %>
+      <% if current_user.user_type.downcase == "manager" %>
+      <%= f.select(:user_type, options_for_select([['Manager','manager'],['Salesperson',"Salesperson"],['Picker', "picker"],['Dispatcher',"Dispatcher"]])) %>
+      <% else %>
+      <%= f.text_field :user_type, :readonly => true %>
+      <% end %>
+      <%= f.submit "Update", :class => "btn_edit" %>
+      
+      <p class="message">Deactivate Account? <%= link_to "Deactivate", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, :class => 'btn_deactivate' %></p>
+    <% end %>
+   
+  </div>
+</div>
+
+
+
+
+

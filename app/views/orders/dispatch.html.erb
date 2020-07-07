@@ -1,0 +1,78 @@
+<%= render 'layouts/header' %>
+
+<h1>Orders</h1>
+
+
+<br/>
+
+<div class="row">
+
+  <div class="media">
+    <div class="media-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+             <th>First name</th>
+            <th>Last name</th>
+            <th>Status</th>
+            <th>Dispatch priority</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <% @orders.each do |order| %>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;"><%= order.first_name %></td>
+            <td style="text-align: center; vertical-align: middle;"><%= order.last_name %></td>
+            <td style="text-align: center; vertical-align: middle;"><%= order.status %></td>
+            <td style="text-align: center; vertical-align: middle;"><%= order.dispatch_priority %></td>
+            <td><%= link_to 'Show', order, class: 'btn btn-primary' %></td>
+            <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever= "<%= order.id %>">Start Dispatching</button>
+</td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<br>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="date" class="col-form-label">Dispatch Date:</label>
+            <input class="form-control" type="date" value="2020-07-04" id="date">
+          </div>
+          <div class="form-group">
+            <label for="mode" class="col-form-label">Mode of Transport:</label>
+            <input class="form-control" id="mode">
+          </div>
+           <div class="form-group">
+            <label for="responsible_person" class="col-form-label">Responsible Person:</label>
+            <input class="form-control" id="responsible_person">
+            <input id="item_id" style="display: none;">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="dispatch-btn">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<%= render 'layouts/header' %>
+<h1>Orders</h1>
+
+
+<br/>
+
+<div class="row">
+
+  <div class="media">
+    <div class="media-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+             <th>First name</th>
+            <th>Last name</th>
+            <th>Status</th>
+            <th>Dispatch priority</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <% @orders.each do |order| %>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;"><%= order.first_name %></td>
+            <td style="text-align: center; vertical-align: middle;"><%= order.last_name %></td>
+            <td style="text-align: center; vertical-align: middle;"><%= status_label(order.status) %></td>
+            <td style="text-align: center; vertical-align: middle;"><%= order.dispatch_priority %></td>
+            <td><%= link_to 'Show', order, class: 'btn btn-primary' %></td>
+            
+            <td><%= link_to 'Edit', edit_order_path(order), class: 'btn btn-mini btn-success' if ["manager","salesperson"].include?(current_user.user_type.downcase) %></td>
+            <td><%= link_to 'Remove', order, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } if ["manager","salesperson"].include?(current_user.user_type.downcase) %></td>
+            
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<br>
+
+

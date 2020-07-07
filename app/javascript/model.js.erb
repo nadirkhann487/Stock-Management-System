@@ -1,0 +1,39 @@
+
+function dispatch()
+{
+	var id = document.getElementById("item_id").value;
+	var date = document.getElementById("date").value;
+	var mode = document.getElementById("mode").value;
+	var responsible_person = document.getElementById("responsible_person").value;  
+  $.ajax({
+    url: '/orders/order_dispatched',
+    type: 'POST',
+    data:({
+        item_id: id,
+        date: date,
+         mode: mode,
+         responsible_person: responsible_person
+    })
+	});
+};
+
+$(document).ready(function() {
+	 
+	$('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var id = button.data('whatever') // Extract info from data-* attributes
+ 
+  var modal = $(this)
+  modal.find('.modal-title').text('Dispatching Details ')
+  modal.find('#item_id').val(id)
+  })
+
+  $("#dispatch-btn").on(
+    'click',
+    function() {
+      
+      dispatch();
+    }
+  );
+});
+

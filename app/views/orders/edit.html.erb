@@ -1,0 +1,84 @@
+<%= render 'layouts/header' %>
+
+<br/>
+
+<p>
+  <strong>Order Id:</strong>
+  <%= @order.id %>
+</p>
+
+<p>
+  <strong>First Name:</strong>
+  <%= @order.first_name %>
+</p>
+
+<p>
+  <strong>Last Name:</strong>
+  <%= @order.last_name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status %>
+</p>
+
+<p>
+  <strong>Dispatch Priority:</strong>
+  <%= @order.dispatch_priority %>
+</p>
+
+<br/><br/>
+
+
+
+
+<h2>Products in current order</h2>
+<br/>
+
+
+
+<div class="row">
+
+  <div class="media">
+    <div class="media-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td><%= Product.find(item.product_id).name %></td>
+            <%= form_tag order_items_path,method: :post do %>
+            <td>
+            	<%= hidden_field_tag :product_id,item.product_id %>
+            	<%= hidden_field_tag :view,'update' %>
+            	<%= number_field_tag :quantity, item.quantity,class: "form-control" %>
+            </td>
+            <td>
+            	<%= submit_tag 'Change',class: 'btn btn-mini btn-primary' %>
+            </td>
+			    
+			<% end %>
+            <td>
+            	<%= link_to 'Remove', item, method: :delete, class: 'btn btn-mini btn-danger', data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<br>
+<%= link_to 'Add New', orders_path ,class: 'btn btn-success' %>
+<%= link_to 'Back', orders_path ,class: 'btn btn-secondary' %>

@@ -1,0 +1,63 @@
+<%= render 'layouts/header' %>
+
+
+<p>
+  <strong>First name:</strong>
+  <%= @order.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @order.last_name %>
+</p>
+
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status %>
+</p>
+
+<p>
+  <strong>Dispatch priority:</strong>
+  <%= @order.dispatch_priority %>
+</p>
+
+<h2>Products in current order</h2>
+<br/>
+
+
+
+<div class="row">
+
+  <div class="media">
+    <div class="media-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Location</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td style="text-align: center; vertical-align: middle;"><%= item.product.name %></td>          
+            <td style="text-align: center; vertical-align: middle;"><%= item.quantity %> </td> 
+            <td style="text-align: center; vertical-align: middle;"><%= item.product.location %> </td> 
+            <td ><%= link_to item.status, item_status_order_path(item_id: item.id), method: :post,class: 'btn btn-primary' unless current_user.user_type.downcase == 'dispatcher'  %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br/>
+
+<%= link_to 'Edit', edit_order_path(@order) ,class: 'btn btn-primary' if ["manager","salesperson"].include?(current_user.user_type.downcase) %>
+<%= link_to 'Back', orders_path,class: 'btn btn-secondary' %>

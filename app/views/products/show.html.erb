@@ -1,0 +1,29 @@
+<%= render 'layouts/header' %>
+
+<p>
+  <strong>Supplier name:</strong>
+  <%= @product.supplier_name %>
+</p>
+
+<p>
+  <strong>Receipt number:</strong>
+  <%= @product.receipt_number %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @product.quantity %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @product.location %>
+</p>
+
+<%= link_to 'Edit', edit_product_path(@product),class: 'btn btn-primary' %> 
+<%= link_to 'Back', products_path ,class: 'btn btn-secondary' %>

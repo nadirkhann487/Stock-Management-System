@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>StockManagementSystem</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body class="<%= 'signin-body' if current_user.nil? || controller_name == "registrations" %>">
+    <div class="container">
+
+      <%= render 'layouts/alerts' %>
+      <%= yield %>
+  </div>
+  </body>
+</html>

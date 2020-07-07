@@ -1,0 +1,64 @@
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="text-center text-sm">
+        <span class="badge badge-success"><%= current_user.user_type.capitalize %> </span>
+    </div>
+    <a class="navbar-brand" href="#">SMS</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <% unless current_user.user_type.downcase == 'dispatcher' %>
+            <li class="nav-item ">
+              <%= link_to 'Home', orders_path,class: "nav-link" %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Orders
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to 'View Orders', orders_path,class: "dropdown-item" %>
+                <%= link_to 'Add New Order', new_order_path,class: "dropdown-item" if ["manager","salesperson"].include?(current_user.user_type.downcase) %>
+               
+              </div>
+            </li>
+            <% if current_user.user_type.downcase == 'manager'%>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <%= link_to 'View Products', products_path,class: "dropdown-item" %>
+                  <%= link_to 'Add New Product', new_product_path,class: "dropdown-item" %>          
+                </div>
+              </li>
+            <% end %> 
+        <% end %>   
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Accounts
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to 'Sign out', destroy_user_session_path, method: :delete,class: "dropdown-item" %>
+             <%= link_to 'Edit Profile', edit_user_registration_path(current_user),class: "dropdown-item" %>
+            <%= link_to 'Add new User', new_user_registration_path,class: "dropdown-item" if current_user.user_type.downcase == "manager" %>
+          </div>
+        </li>
+         
+      </ul>
+
+      <% if ["index"].include?(params[:action]) %>
+       <%= search_form_for @q,:html => {:class =>  "form-inline"} do |f| %>
+          <% if controller.controller_name == "orders" %>
+            <%= f.text_field :last_name_cont,class: "form-control mr-sm-2" %>
+          <% else %>
+             <%= f.text_field :name_or_supplier_name_cont,class: "form-control mr-sm-2" %>
+          <% end %> 
+          <%= f.submit "Search",class: 'btn btn-outline-success my-2 my-sm-0' %>   
+        <% end %>
+      <% end %>
+      
+    </div>
+  </nav>
