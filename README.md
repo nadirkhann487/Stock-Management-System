@@ -6,3 +6,5 @@
 - Dispatcher would do the dispatching process and assign the person to deliver the order.
 - Manager can use all the features of the project, they can register a new user, add more products to the inventory and also check the orders and its statuses.
 - Online Link: " https://nadir-stock-management-system.herokuapp.com/ "
+- Login Details for manager: email: nadir@example.com, Password: 123123
+- or sign up using https://nadir-stock-management-system.herokuapp.com/users/sign_up
